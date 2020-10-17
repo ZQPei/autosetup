@@ -1,0 +1,39 @@
+#!/bin/bash
+
+base_dir="/"
+port=8888
+background=false
+verbose=false
+
+while getopts ":p:d:bv" opt
+do
+    case $opt in
+        p)
+        port=$OPTARG
+        ;;
+        d)
+        base_dir=$OPTARG
+        ;;
+        b)
+        background=true
+        ;;
+        v)
+        verbose=true
+        ;;
+        ?)
+        echo "Unknow input"
+        exit 1
+        ;;
+    esac
+done
+
+
+echo "building server from ${base_dir} at port ${port}"
+if $background; then
+    echo "http server will running in background"
+    nohup build_server --port ${port} --base_dir ${base_dir} >> /dev/null 2>&1 &
+else
+    echo "http server will running in verbose mode"
+    build_server --port ${port} --base_dir ${base_dir}
+fi
+

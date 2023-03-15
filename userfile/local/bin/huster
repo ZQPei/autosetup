@@ -30,10 +30,10 @@ done
 
 echo "building server from ${base_dir} at port ${port}"
 if $background; then
-    echo "http server will running in background"
+    echo "http server will be running in background"
     nohup build_server --port ${port} --base_dir ${base_dir} >> /dev/null 2>&1 &
 else
-    echo "http server will running in verbose mode"
+    echo "http server will be running in verbose mode"
     build_server --port ${port} --base_dir ${base_dir}
 fi
 

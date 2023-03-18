@@ -135,7 +135,7 @@ function _auto_setup_main() {
 
   set -e
 
-  # setup_min_apt_packages
+  setup_min_apt_packages
   setup_ohmybash
   setup_userfiles
   # setup_python

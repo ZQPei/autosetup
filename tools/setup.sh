@@ -99,7 +99,7 @@ function setup_python_env() {
   _auto_setup_run wget -c -P ${HOME}/Downloads https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
 
   echo "install commenly used python packages"
-  _auto_setup_run pip install -r ${AUTOSETUP_HOME}/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+  _auto_setup_run pip install -r ${AUTOSETUP_HOME}/userfile/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 }
 
 function _auto_setup_main() {

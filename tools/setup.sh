@@ -103,7 +103,7 @@ function setup_python_env() {
 }
 
 function _auto_setup_main() {
-  AUTOSETUP_HOME=$(cd $(dirname $0) && pwd)
+  AUTOSETUP_HOME=$(cd $(dirname $0)/../ && pwd)
   echo ${AUTOSETUP_HOME}
 
   # Use colors, but only if connected to a terminal, and that terminal

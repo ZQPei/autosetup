@@ -52,6 +52,7 @@ jobs:
       - name: Run AutoSetup on Ubuntu
         run: |
           echo Run AutoSetup on Ubuntu
+          sudo apt install -y zsh
           ./tools/test_setup_omz.sh
 
   test_setup_omb:

@@ -36,7 +36,7 @@ function _auto_setup_run {
   fi
 }
 
-function setup_min_apt_packages() {
+function _auto_setup_min_apt_packages() {
   echo "install minimum apt packages"
   _auto_setup_run sudo apt update
   _auto_setup_run sudo apt install -y build-essential vim zsh ssh sshpass git net-tools tmux \
@@ -45,7 +45,7 @@ function setup_min_apt_packages() {
   _auto_setup_run sudo apt upgrade
 }
 
-function setup_max_apt_packages() {
+function _auto_setup_max_apt_packages() {
   echo "install maximum apt packages"
   _auto_setup_run sudo apt update
   _auto_setup_run sudo apt install -y build-essential vim zsh ssh sshpass git net-tools tmux libc6:i386 \
@@ -57,15 +57,17 @@ function setup_max_apt_packages() {
   _auto_setup_run sudo apt upgrade
 }
 
-function setup_ohmyzsh() {
+function _auto_setup_ohmyzsh() {
   echo "install oh-my-zsh"
 
-  _auto_setup_run sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-  _auto_setup_run cp -r ${AUTOSETUP_HOME}/userfile/.oh-my-zsh/* ${HOME}/.oh-my-zsh
+  _auto_setup_run sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
+  _auto_setup_run cp -ar ${AUTOSETUP_HOME}/userfile/.oh-my-zsh/* ${HOME}/.oh-my-zsh &&
+  _auto_setup_run cp ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh &&
+  _auto_setup_run sed -i '/ZSH_THEME*/s/ZSH_THEME.*/ZSH_THEME=\"pzq\"/' ${HOME}/.zshrc &&
+  _auto_setup_run echo -e '\n\nif [ -f $HOME/setup_env.sh ] || [ -h $HOME/setup_env.sh ]; then\n  source $HOME/setup_env.sh\nfi\n' >> ${HOME}/.zshrc
 }
 
-function setup_ohmybash() {
+function _auto_setup_ohmybash() {
   echo "install oh-my-bash"
 
   TMPOSH=/tmp/oh-my-bash
@@ -77,7 +79,7 @@ function setup_ohmybash() {
 }
 
 
-function setup_userfiles() {
+function _auto_setup_userfiles() {
   echo "setup custom user files"
   _auto_setup_run mkdir -p ${HOME}/pzq ${HOME}/pzq/Downloads ${HOME}/pzq/Workspace ${HOME}/local
 
@@ -93,7 +95,7 @@ function setup_userfiles() {
       ${HOME}/local
 }
 
-function setup_python_env() {
+function _auto_setup_python_env() {
   echo "download commenly used packages"
   # _auto_setup_run wget -c -P ${HOME}/Downloads https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.10-Linux-x86_64.sh
   _auto_setup_run wget -c -P ${HOME}/Downloads https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
@@ -101,46 +103,3 @@ function setup_python_env() {
   echo "install commenly used python packages"
   _auto_setup_run pip install -r ${AUTOSETUP_HOME}/userfile/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 }
-
-function _auto_setup_main() {
-  AUTOSETUP_HOME=$(cd $(dirname $0)/../ && pwd)
-  echo ${AUTOSETUP_HOME}
-
-  # Use colors, but only if connected to a terminal, and that terminal
-  # supports them.
-  local ncolors=
-  if type -P tput &>/dev/null; then
-    ncolors=$(tput colors 2>/dev/null || tput Co 2>/dev/null || echo -1)
-  fi
-
-  local RED GREEN YELLOW BLUE BOLD NORMAL
-  if [[ -t 1 && $ncolors && $ncolors -ge 8 ]]; then
-    RED=$(tput setaf 1 2>/dev/null || tput AF 1 2>/dev/null)
-    GREEN=$(tput setaf 2 2>/dev/null || tput AF 2 2>/dev/null)
-    YELLOW=$(tput setaf 3 2>/dev/null || tput AF 3 2>/dev/null)
-    BLUE=$(tput setaf 4 2>/dev/null || tput AF 4 2>/dev/null)
-    BOLD=$(tput bold 2>/dev/null || tput md 2>/dev/null)
-    NORMAL=$(tput sgr0 2>/dev/null || tput me 2>/dev/null)
-  else
-    RED=""
-    GREEN=""
-    YELLOW=""
-    BLUE=""
-    BOLD=""
-    NORMAL=""
-  fi
-
-  local install_opts install_prefix
-  _auto_setup_readargs "$@"
-
-  set -e
-
-  setup_min_apt_packages
-  setup_ohmybash
-  setup_userfiles
-  # setup_python
-
-  unset AUTOSETUP_HOME
-}
-
-_auto_setup_main "$@" 5>&2

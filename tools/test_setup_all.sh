@@ -2,4 +2,4 @@
 
 set -e
 
-./tools/setup.sh
+./tools/setup_all.sh

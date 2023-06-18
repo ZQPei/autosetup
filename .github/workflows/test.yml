@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  test:
+  test_setup_all:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -33,4 +33,62 @@ jobs:
       - name: Run AutoSetup on Ubuntu
         run: |
           echo Run AutoSetup on Ubuntu
-          ./tools/test.sh
+          ./tools/test_setup_all.sh
+
+  test_setup_omz:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: |
+          echo Run AutoSetup on Ubuntu
+          ./tools/test_setup_omz.sh
+
+  test_setup_omb:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: |
+          echo Run AutoSetup on Ubuntu
+          ./tools/test_setup_omb.sh
+
+  test_setup_userfile:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run AutoSetup on Ubuntu
+        run: |
+          echo Run AutoSetup on Ubuntu
+          ./tools/test_setup_userfile.sh
+

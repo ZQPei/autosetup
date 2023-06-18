@@ -4,7 +4,7 @@ function _auto_setup_main() {
   AUTOSETUP_HOME=$(cd $(dirname $0)/../ && pwd)
   echo ${AUTOSETUP_HOME}
 
-  source ${AUTOSETUP_HOME}/functional.sh
+  source ${AUTOSETUP_HOME}/tools/functional.sh
 
   # Use colors, but only if connected to a terminal, and that terminal
   # supports them.

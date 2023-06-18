@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source functional.sh
+source ${AUTOSETUP_HOME}/functional.sh
 
 function _auto_setup_main() {
   AUTOSETUP_HOME=$(cd $(dirname $0)/../ && pwd)

@@ -7,7 +7,7 @@ umask 002
 # for aliases
 alias ll="ls -alh"
 alias huster="nohup build_server --port 8887 --base_dir / >> /dev/null 2>&1 & ;"
-alias py37_env="source /opt/adlab/python37/bin/activate" 
+alias py37_env="source /opt/adlab/python37/bin/activate"
 alias py37="conda activate py37"
 alias set_env="source ${HOME}/local/bin/setup_tvm_env.sh"
 
@@ -154,10 +154,10 @@ function docker_run_hint() {
                     -v /tmp/.x11-unix:/tmp/.x11-unix -e DISPLAY=unix$DISPLAY \
                     --net=host \
                     reg.docker.alibaba-inc.com/computing_platform/ailice:py37_pth150_cuda112_cudnn811_ubuntu1804'
-    echo 'docker run -itd --gpus all -u pzq:administrator --privileged --name py37_pth171_cuda112_cudnn811_ubuntu1804_pzq \      
-                    -e HOME=/home/pzq \          
+    echo 'docker run -itd --gpus all -u pzq:administrator --privileged --name py37_pth171_cuda112_cudnn811_ubuntu1804_pzq \
+                    -e HOME=/home/pzq \
                     -w /home/pzq -v /home/pzq:/home/pzq \
-                    -v /home/pzq/Workspace:/home/pzq/Workspace \                                                            
+                    -v /home/pzq/Workspace:/home/pzq/Workspace \
                     -v /etc/localtime:/etc/localtime:ro \
                     -v /tmp/.x11-unix:/tmp/.x11-unix -e DISPLAY=unix$DISPLAY \
                     --net=host \

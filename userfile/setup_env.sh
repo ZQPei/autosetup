@@ -121,7 +121,7 @@ export PATH=${HOME}/local/bin:/usr/local/bin:${CUDA_HOME}/bin:${PATH}
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 
 # for aliases
-alias hpc-pzq="ssh pzq@30.220.136.117"
+alias hpc-pzq="ssh pzq@x.x.x.x"
 
 function auto_connect() {
     for line in $(cat ~/setup_env.sh | grep ssh); do
@@ -166,6 +166,12 @@ function docker_run_hint() {
 
 function nsys_hint() {
     echo 'sudo -E LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/had_deps/lib/ nsys profile --trace=cuda,nvtx --backtrace=none --sample=none -o "/home/administrator/Workspace/tmp/`date +%F-%T`.qdrep" profile.sh'
+}
+
+function nfs_hint() {
+    echo "sudo apt install -y  nfs-kernel-server nfs-common"
+    echo "/home/pzq/pzq/Workspace/ *(rw,sync,insecure,no_root_squash,no_subtree_check)"
+    echo "sudo mount -t nfs x.x.x.x:/mnt/4T/workspace/pzq/Workspace /home/pzq/Workspace"
 }
 
 fi

@@ -71,11 +71,11 @@ function _auto_setup_ohmybash() {
   echo "install oh-my-bash"
 
   TMPOSH=/tmp/oh-my-bash
+  _auto_setup_run cp -a ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh &&
   _auto_setup_run rm -rf ${TMPOSH} &&
   _auto_setup_run git clone -b main --depth=1 https://github.com/ZQPei/oh-my-bash.git ${TMPOSH} &&
   _auto_setup_run bash ${TMPOSH}/tools/install_local.sh &&
-  _auto_setup_run rm -rf ${TMPOSH} &&
-  _auto_setup_run cp -a ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh
+  _auto_setup_run rm -rf ${TMPOSH}
   unset TMPOSH
 }
 

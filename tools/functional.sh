@@ -62,7 +62,7 @@ function _auto_setup_ohmyzsh() {
 
   _auto_setup_run sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
   _auto_setup_run cp -ar ${AUTOSETUP_HOME}/userfile/.oh-my-zsh/* ${HOME}/.oh-my-zsh &&
-  _auto_setup_run cp ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh &&
+  _auto_setup_run cp -a ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh &&
   _auto_setup_run sed -i '/ZSH_THEME*/s/ZSH_THEME.*/ZSH_THEME=\"pzq\"/' ${HOME}/.zshrc &&
   _auto_setup_run echo -e '\n\nif [ -f $HOME/setup_env.sh ] || [ -h $HOME/setup_env.sh ]; then\n  source $HOME/setup_env.sh\nfi\n' >> ${HOME}/.zshrc
 }
@@ -74,7 +74,8 @@ function _auto_setup_ohmybash() {
   _auto_setup_run rm -rf ${TMPOSH} &&
   _auto_setup_run git clone -b main --depth=1 https://github.com/ZQPei/oh-my-bash.git ${TMPOSH} &&
   _auto_setup_run bash ${TMPOSH}/tools/install_local.sh &&
-  _auto_setup_run rm -rf ${TMPOSH}
+  _auto_setup_run rm -rf ${TMPOSH} &&
+  _auto_setup_run cp -a ${AUTOSETUP_HOME}/userfile/setup_env.sh ${HOME}/setup_env.sh
   unset TMPOSH
 }
 
